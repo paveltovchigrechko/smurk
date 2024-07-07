@@ -4,6 +4,8 @@ import (
 	"bufio"
 	"fmt"
 	"io"
+
+	"smurk/commands"
 )
 
 const PROMPT = "smurf >> "
@@ -18,7 +20,8 @@ func Start(in io.Reader, out io.Writer) {
 		if !scanned {
 			return
 		} else {
-			fmt.Fprintf(out, "You have entered %q\n", scanner.Text())
+			respond := commands.ReadCommand(scanner.Text())
+			fmt.Fprintln(out, respond)
 		}
 	}
 
